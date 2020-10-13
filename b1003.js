@@ -8,36 +8,35 @@ let rl = readline.createInterface({
 var count = 0;
 var run_count = 0;
 
+function fib(n) {
+  const memo = [0, 1];
+
+  if (n === 0) return "1 0";
+  if (n === 1) return "0 1";
+
+  for (let i = 2; i <= n; i++) {
+    memo[i] = memo[i - 1] + memo[i - 2];
+  }
+
+  return memo[n - 1] + " " + memo[n];
+}
+
 rl.on("line", (args) => {
-    const n = parseInt(args)
+  const n = parseInt(args);
 
-    if (count === 0) {
-        count = n
-        return;
-    } else {
-        let one = 0;
-        let zero = 0;
+  if (count === 0) {
+    count = n;
+    return;
+  } else {
+    run_count++;
 
-        function fibonacci (n) {
-            if (n === 0) {
-                zero++;
-                return 0
-            } else if (n === 1) {
-                one++;
-                return 1
-            } else {
-                return fibonacci(n - 1) + fibonacci(n - 2)
-            }
-        }
+    const result = fib(n);
+    console.log(result);
 
-        for (let i = 0; i < n; i++) {
-            
-        }
-
-        fibonacci(n)
-        console.log(zero + " " + one)
-
-        run_count++
-        if (count === run_count) { rl.close() }
+    if (count === run_count) {
+      rl.close();
     }
+  }
 });
+
+// * 23221353	demnodey	1003	맞았습니다!!	7736	152	node.js / 수정	649
